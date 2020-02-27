@@ -30,6 +30,9 @@ namespace EpicTariff
         public abstract int ForeignMinuteCharge();
         public abstract double MobileInternetCharge();
 
-        
+        public override string ToString()
+        {
+            return $"{Name}\nTariff: {Tariff}\nBasicInternet: {BasicInternet}\nBasicMinutes: {BasicMinutes}\nBasicForeignMinutes: {BasicForeignMinutes}\n";
+        }
     }
 }

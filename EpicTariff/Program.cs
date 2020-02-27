@@ -11,6 +11,8 @@ namespace EpicTariff
         static void Main(string[] args)
         {
             Program program = new Program();
+            XmlHandler xml = new XmlHandler();
+            xml.LoadfromXML(clients);
             bool loop = true;
             while (loop)
             {
@@ -35,9 +37,13 @@ namespace EpicTariff
                         Console.Clear();
                         goto Here;
                     case "2":
+                        prov.ListClients(clients);
+                        Console.ReadKey();
                         Console.Clear();
                         goto Here;
                     case "3":
+                        prov.UpdateClient(clients);
+                        Console.ReadKey();
                         Console.Clear();
                         goto Here;
                     case "4":
@@ -61,13 +67,14 @@ namespace EpicTariff
             inpuoup.Writer("1. menüpont");
             inpuoup.Writer("2. menüpont");
         }
-        static object Menu()
+        static bool Menu()
         {
-            
-            Provider prov = new Provider();
+            XmlHandler xml = new XmlHandler();
             InputOutput inpuoup = new InputOutput();
             inpuoup.Writer("1. Kliensek kezelése");
             inpuoup.Writer("2. Díjcsomagok kezelése");
+            
+            
             string chos = inpuoup.Reader();
             while (true)
             {
@@ -77,13 +84,9 @@ namespace EpicTariff
                         ClientSubMenu();
                         return true;
                     case "2":
-
-                        return true;
-                    case "3":
-                        return true;
-                    case "4":
                         return true;
                     case "0":
+                        xml.SaveToXml(clients);
                         Environment.Exit(1);
                         break;
                     default:

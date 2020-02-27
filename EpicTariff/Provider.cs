@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 
 namespace EpicTariff 
 {
@@ -8,6 +9,12 @@ namespace EpicTariff
     {
         InputOutput inpuoup = new InputOutput();
 
+        public int GenerateID(List<Client> clients)
+        {
+            int last = clients.Count;
+            last++;
+            return last;
+        }
         public TariffPlan ChooseTariff(string nachos)
         {
             InputOutput inpuoup = new InputOutput();
@@ -34,7 +41,7 @@ namespace EpicTariff
         public List<Client> CreateClient(List<Client> clients)
         {
             Client cl = new Client();
-            cl.ID = 1;
+            cl.ID = GenerateID(clients);
             inpuoup.Writer("Give me a name: ");
             cl.Name = inpuoup.Reader();
             inpuoup.Writer("Give me an income: ");
@@ -51,5 +58,98 @@ namespace EpicTariff
             clients.Add(cl);
             return clients;
         }
+
+        public void ListClients(List<Client> clients)
+        {
+            foreach (var client in clients)
+            {
+                inpuoup.Writer(client.ToString());
+            }
+        }
+
+        public List<Client> UpdateClient(List<Client> clients)
+        {
+            Error:
+            string attribute = "";
+            try
+            {
+                Console.WriteLine("Give me what you want to rewrite(Name, Income): ");
+                attribute = inpuoup.Reader().ToUpper();
+                if(attribute != "NAME" && attribute != "INCOME")
+                {
+                    throw new Exception();
+                }
+            }
+            catch (Exception)
+            {
+                inpuoup.Writer("You must write a Name or an Income");
+                goto Error;
+            }
+                      
+            int ID = 0;
+            ListClients(clients);
+            List<int> ids = new List<int>();
+            foreach (var client in clients)
+            {
+                ids.Add(client.ID);
+            }
+            try
+            {
+                inpuoup.Writer("Which ID of a client you want to rewrite?");
+                ID = int.Parse(inpuoup.Reader());
+                foreach (var client in clients)
+                {
+                    if (!ids.Contains(ID))
+                    {
+                        throw new Exception();
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                inpuoup.Writer("Not valid input");
+                goto Error;
+            }
+            try
+            {
+                switch (attribute)
+                {
+                    case "NAME":
+                        inpuoup.Writer("what you want to rewrite?");
+                        string newName = inpuoup.Reader();
+                        foreach (var client in clients)
+                        {
+                            if (client.ID == ID)
+                            {
+                                client.Name = newName;
+                            }
+                        }
+                        break;
+                    case "INCOME":
+                        inpuoup.Writer("what you want to rewrite?");
+                        int newIncome = int.Parse(inpuoup.Reader());
+                        foreach (var client in clients)
+                        {
+                            if (client.ID == ID)
+                            {
+                                client.Income = newIncome;
+                            }
+                        }
+                        break;
+                    default:
+                        Console.WriteLine("Wrong option...");
+                        Thread.Sleep(500);
+                        Console.Clear();
+                        break;
+                }
+            }
+            catch (Exception)
+            {
+                inpuoup.Writer("Not valid input");
+            }
+
+            return clients;
+        }
+        
     }
 }

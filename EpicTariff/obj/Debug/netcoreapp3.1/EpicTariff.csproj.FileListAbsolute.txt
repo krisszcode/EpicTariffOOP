@@ -9,3 +9,14 @@ C:\Users\Krissz\source\repos\EpicTariff\EpicTariff\bin\Debug\netcoreapp3.1\EpicT
 C:\Users\Krissz\source\repos\EpicTariff\EpicTariff\bin\Debug\netcoreapp3.1\EpicTariff.pdb
 C:\Users\Krissz\source\repos\EpicTariff\EpicTariff\obj\Debug\netcoreapp3.1\EpicTariff.dll
 C:\Users\Krissz\source\repos\EpicTariff\EpicTariff\obj\Debug\netcoreapp3.1\EpicTariff.pdb
+D:\programozás\programozás\c#\EpicTariffOOP\EpicTariff\bin\Debug\netcoreapp3.1\EpicTariff.exe
+D:\programozás\programozás\c#\EpicTariffOOP\EpicTariff\bin\Debug\netcoreapp3.1\EpicTariff.deps.json
+D:\programozás\programozás\c#\EpicTariffOOP\EpicTariff\bin\Debug\netcoreapp3.1\EpicTariff.runtimeconfig.json
+D:\programozás\programozás\c#\EpicTariffOOP\EpicTariff\bin\Debug\netcoreapp3.1\EpicTariff.runtimeconfig.dev.json
+D:\programozás\programozás\c#\EpicTariffOOP\EpicTariff\bin\Debug\netcoreapp3.1\EpicTariff.dll
+D:\programozás\programozás\c#\EpicTariffOOP\EpicTariff\bin\Debug\netcoreapp3.1\EpicTariff.pdb
+D:\programozás\programozás\c#\EpicTariffOOP\EpicTariff\obj\Debug\netcoreapp3.1\EpicTariff.csprojAssemblyReference.cache
+D:\programozás\programozás\c#\EpicTariffOOP\EpicTariff\obj\Debug\netcoreapp3.1\EpicTariff.AssemblyInfoInputs.cache
+D:\programozás\programozás\c#\EpicTariffOOP\EpicTariff\obj\Debug\netcoreapp3.1\EpicTariff.AssemblyInfo.cs
+D:\programozás\programozás\c#\EpicTariffOOP\EpicTariff\obj\Debug\netcoreapp3.1\EpicTariff.dll
+D:\programozás\programozás\c#\EpicTariffOOP\EpicTariff\obj\Debug\netcoreapp3.1\EpicTariff.pdb
