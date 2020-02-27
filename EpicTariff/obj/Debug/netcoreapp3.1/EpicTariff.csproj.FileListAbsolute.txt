@@ -1,0 +1,11 @@
+C:\Users\Krissz\source\repos\EpicTariff\EpicTariff\obj\Debug\netcoreapp3.1\EpicTariff.csprojAssemblyReference.cache
+C:\Users\Krissz\source\repos\EpicTariff\EpicTariff\obj\Debug\netcoreapp3.1\EpicTariff.AssemblyInfoInputs.cache
+C:\Users\Krissz\source\repos\EpicTariff\EpicTariff\obj\Debug\netcoreapp3.1\EpicTariff.AssemblyInfo.cs
+C:\Users\Krissz\source\repos\EpicTariff\EpicTariff\bin\Debug\netcoreapp3.1\EpicTariff.exe
+C:\Users\Krissz\source\repos\EpicTariff\EpicTariff\bin\Debug\netcoreapp3.1\EpicTariff.deps.json
+C:\Users\Krissz\source\repos\EpicTariff\EpicTariff\bin\Debug\netcoreapp3.1\EpicTariff.runtimeconfig.json
+C:\Users\Krissz\source\repos\EpicTariff\EpicTariff\bin\Debug\netcoreapp3.1\EpicTariff.runtimeconfig.dev.json
+C:\Users\Krissz\source\repos\EpicTariff\EpicTariff\bin\Debug\netcoreapp3.1\EpicTariff.dll
+C:\Users\Krissz\source\repos\EpicTariff\EpicTariff\bin\Debug\netcoreapp3.1\EpicTariff.pdb
+C:\Users\Krissz\source\repos\EpicTariff\EpicTariff\obj\Debug\netcoreapp3.1\EpicTariff.dll
+C:\Users\Krissz\source\repos\EpicTariff\EpicTariff\obj\Debug\netcoreapp3.1\EpicTariff.pdb
