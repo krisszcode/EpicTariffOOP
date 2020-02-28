@@ -6,24 +6,24 @@ namespace EpicTariff
 {
     class MobilL : TariffPlan
     {
-        public MobilL(string name = "MobilL", int tariff = 40, int basicInternet = 10, int basicMinutes = 200, int basicForeignMinutes = 100)
-           : base(name, tariff, basicInternet, basicMinutes, basicForeignMinutes)
+        public MobilL(string name = "MobilL", int tariff = 40, int internet = 10, int minutes = 200, int foreignMinutes = 100)
+           : base(name, tariff, internet, minutes, foreignMinutes)
         {
 
         }
        
 
-        public override int ForeignMinuteCharge()
+        public override int ForeignMinuteCharge(Client client, int requestedForeignMinutes)
         {
             throw new NotImplementedException();
         }
 
-        public override int MinuteCharge()
+        public override int MinuteCharge(Client client, int requestedMinutes)
         {
             throw new NotImplementedException();
         }
 
-        public override double MobileInternetCharge()
+        public override int MobileInternetCharge(Client client, int requestedInternet)
         {
             throw new NotImplementedException();
         }

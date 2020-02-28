@@ -11,28 +11,29 @@ namespace EpicTariff
 
         }
 
-        public TariffPlan(string name, int tariff, int basicInternet, int basicMinutes, int basicForeignMinutes)
+        public TariffPlan(string name, int tariff, int internet, int minutes, int foreignMinutes)
         {
             Name = name;
             Tariff = tariff;
-            BasicInternet = basicInternet;
-            BasicMinutes = basicMinutes;
-            BasicForeignMinutes = basicForeignMinutes;
+            Internet = internet;
+            Minutes = minutes;
+            ForeignMinutes = foreignMinutes;
         }
         public string Name { get; set; }
         public int Tariff { get; set; }
-        public double BasicInternet { get; set; }
-        public int BasicMinutes { get; set; }
-        public int BasicForeignMinutes { get; set; }
+        public int Internet { get; set; }
+        public int Minutes { get; set; }
+        public int ForeignMinutes { get; set; }
 
        
-        public abstract int MinuteCharge();
-        public abstract int ForeignMinuteCharge();
-        public abstract double MobileInternetCharge();
+        public abstract int MinuteCharge(Client client, int requestedMinutes);
+
+        public abstract int ForeignMinuteCharge(Client client, int requestedForeignMinutes);
+        public abstract int MobileInternetCharge(Client client, int requestedInternet);
 
         public override string ToString()
         {
-            return $"{Name}\nTariff: {Tariff}\nBasicInternet: {BasicInternet}\nBasicMinutes: {BasicMinutes}\nBasicForeignMinutes: {BasicForeignMinutes}\n";
+            return $"{Name}\nTariff: {Tariff}\nBasicInternet: {Internet}\nBasicMinutes: {Minutes}\nBasicForeignMinutes: {ForeignMinutes}\n";
         }
     }
 }

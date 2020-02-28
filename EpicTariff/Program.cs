@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace EpicTariff
 {
@@ -23,30 +22,33 @@ namespace EpicTariff
         {
             Here:
             InputOutput inpuoup = new InputOutput();
-            Provider prov = new Provider();
+            ClientProvider clientprov = new ClientProvider();
             inpuoup.Writer("1. Kliens létrehozása");
             inpuoup.Writer("2. Kliensek listázása");
             inpuoup.Writer("3. Kliensek módosítása");
+            inpuoup.Writer("4. Kliensek törlése");
             string chos = inpuoup.Reader();
             while (true)
             {
                 switch (chos)
                 {
                     case "1":
-                        prov.CreateClient(clients);
+                        clientprov.CreateClient(clients);
                         Console.Clear();
                         goto Here;
                     case "2":
-                        prov.ListClients(clients);
+                        clientprov.ListClients(clients);
                         Console.ReadKey();
                         Console.Clear();
                         goto Here;
                     case "3":
-                        prov.UpdateClient(clients);
+                        clientprov.UpdateClient(clients);
                         Console.ReadKey();
                         Console.Clear();
                         goto Here;
                     case "4":
+                        clientprov.RemoveAClient(clients);
+                        Console.ReadKey();
                         Console.Clear();
                         goto Here;
                     case "0":
@@ -61,11 +63,58 @@ namespace EpicTariff
                
             }
         }
-        static void SubMenu2()
+        static bool TariffSubMenu()
         {
+        Here:
             InputOutput inpuoup = new InputOutput();
-            inpuoup.Writer("1. menüpont");
-            inpuoup.Writer("2. menüpont");
+            ClientProvider clientprov = new ClientProvider();
+            TariffProvider tarprov = new TariffProvider();
+            inpuoup.Writer("1. Tarifák kilistázása");
+            inpuoup.Writer("2. Tarfia hozzárendelése ügyfélhez");
+            inpuoup.Writer("3. Tarifa módosítása");
+            inpuoup.Writer("4. Tarfia megvonása ügyféltől");
+            inpuoup.Writer("5. Mobilinternet kérés");
+            inpuoup.Writer("6. Perc kérés");
+            inpuoup.Writer("7. Külföldi perc kérés");
+            string chos = inpuoup.Reader();
+            while (true)
+            {
+                switch (chos)
+                {
+                    case "1":
+                        tarprov.ListTariff();
+                        Console.ReadKey();
+                        Console.Clear();
+                        goto Here;
+                    case "2":
+                        clientprov.ListClients(clients);
+                        tarprov.TariffToClient(clients);
+                        Console.ReadKey();
+                        Console.Clear();
+                        goto Here;
+                    case "3":
+                        clientprov.ListClients(clients);
+                        tarprov.ModifyTariff(clients);
+                        Console.ReadKey();
+                        Console.Clear();
+                        goto Here;
+                    case "4":
+                        clientprov.ListClients(clients);
+                        tarprov.RemoveTariff(clients);
+                        Console.ReadKey();
+                        Console.Clear();
+                        goto Here;
+                    case "0":
+                        Console.Clear();
+                        return false;
+                    default:
+                        Console.WriteLine("Wrong option...");
+                        Thread.Sleep(500);
+                        Console.Clear();
+                        goto Here;
+                }
+
+            }
         }
         static bool Menu()
         {
@@ -84,6 +133,7 @@ namespace EpicTariff
                         ClientSubMenu();
                         return true;
                     case "2":
+                        TariffSubMenu();
                         return true;
                     case "0":
                         xml.SaveToXml(clients);

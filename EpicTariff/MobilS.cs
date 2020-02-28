@@ -6,23 +6,27 @@ namespace EpicTariff
 {
     class MobilS : TariffPlan
     {
-        public MobilS(string name = "MobilS", int tariff = 10, int basicInternet = 1, int basicMinutes = 60, int basicForeignMinutes = 30)
-            : base(name, tariff, basicInternet, basicMinutes, basicForeignMinutes)
+        public MobilS(string name = "MobilS", int tariff = 10, int internet = 1, int minutes = 60, int foreignMinutes = 30)
+            : base(name, tariff, internet, minutes, foreignMinutes)
         {
             
         }
-
-        public override int ForeignMinuteCharge()
-        {
-            throw new NotImplementedException();
+        public override int ForeignMinuteCharge(Client client, int requestedForeignMinutes)
+        {             
+            if (client.Income < requestedForeignMinutes * 0.22)
+            {
+                throw new NotEnoughMoney();
+            }
+            client.Income -= requestedForeignMinutes * 022;
+            return client.Package.ForeignMinutes += requestedForeignMinutes;
         }
 
-        public override int MinuteCharge()
+        public override int MinuteCharge(Client client, int requestedMinutes)
         {
-            throw new NotImplementedException();
+            //return client.Income - requestedForeignMinutes * 0.22;
         }
 
-        public override double MobileInternetCharge()
+        public override int MobileInternetCharge(Client client, int requestedInternet)
         {
             throw new NotImplementedException();
         }

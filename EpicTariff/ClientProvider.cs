@@ -5,15 +5,31 @@ using System.Threading;
 
 namespace EpicTariff 
 {
-    public class Provider
+    public class ClientProvider
     {
         InputOutput inpuoup = new InputOutput();
 
         public int GenerateID(List<Client> clients)
         {
-            int last = clients.Count;
-            last++;
-            return last;
+            Random rand = new Random();
+            int id = rand.Next(1, 10000);
+            List<int> ids = new List<int>();
+            foreach (var client in clients)
+            {
+                ids.Add(id);
+            }
+            while(true)
+            {
+                if(ids.Contains(id))
+                {
+                    id = rand.Next(1, 10000);
+                }
+                else
+                {
+                    break;
+                }
+            }
+            return id;
         }
         public TariffPlan ChooseTariff(string nachos)
         {
@@ -115,7 +131,7 @@ namespace EpicTariff
                 switch (attribute)
                 {
                     case "NAME":
-                        inpuoup.Writer("what you want to rewrite?");
+                        inpuoup.Writer("What will be the Name?");
                         string newName = inpuoup.Reader();
                         foreach (var client in clients)
                         {
@@ -126,7 +142,7 @@ namespace EpicTariff
                         }
                         break;
                     case "INCOME":
-                        inpuoup.Writer("what you want to rewrite?");
+                        inpuoup.Writer("What will be the Income?");
                         int newIncome = int.Parse(inpuoup.Reader());
                         foreach (var client in clients)
                         {
@@ -150,6 +166,18 @@ namespace EpicTariff
 
             return clients;
         }
-        
+        public List<Client> RemoveAClient(List<Client> clients)
+        {
+            inpuoup.Writer("Give me an id to remove:");
+            int id = int.Parse(inpuoup.Reader());
+            for (int i = 0; i < clients.Count; i++)
+            {
+                if(clients[i].ID  == id)
+                {
+                    clients.RemoveAt(i);
+                }
+            }
+            return clients;
+        }
     }
 }
