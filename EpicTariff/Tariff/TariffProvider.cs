@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using EpicTariff.Interface;
+using EpicTariff.Sexception;
 
-namespace EpicTariff
+namespace EpicTariff.Data
 {
     public class TariffProvider
     {
@@ -46,9 +48,9 @@ namespace EpicTariff
                 inpuoup.Writer("Give me a client's ID: ");
                 int id = int.Parse(inpuoup.Reader());
                 ClientNotExistAndNotSubscribed(clients, id);
-                AddTariff(clients, id, "Which tariff goes to the client? ");
+                AddTariff(clients, id, "Choose a tariffplan (MobilS, MobilM, MobilL , MobilXL):  ");
+                
             }
-            
             catch (Exception)
             {
                 inpuoup.Writer("ID not exist or subscribed");
@@ -82,13 +84,29 @@ namespace EpicTariff
                 inpuoup.Writer("Give me a client's ID: ");
                 int id = int.Parse(inpuoup.Reader());
                 ClientNotExistAndSubscribed(clients, id);
-                AddTariff(clients, id, "What is the new Tariff? (MobilM/S/L/XL) ");
+                AddTariff(clients, id, "What is the new Tariff? (MobilM/MobilS/MobilL/MobilXL) ");
+            }
+            catch(NotEnoughMoney)
+            {
+                inpuoup.Writer("You dont have enough money to change your tariff to this");
+
             }
             catch (Exception)
             {
                 inpuoup.Writer("Bad ID or not subscribed or wrong choose");
             }
             return clients;
+        }
+
+        public bool CheckMoney(TariffPlan tariff, Client client)
+        {
+            //client.Income + client.Package.GetMoney(client).Income >= m.LoseMoney(client).Income
+            if (client.Income + client.Package.Tariff >= tariff.Tariff)
+            {
+                return true;
+            }
+            else
+                return false;
         }
 
         public List<Client> AddTariff(List<Client> clients, int id, string desc)
@@ -106,31 +124,87 @@ namespace EpicTariff
                     switch (nachos)
                     {
                         case "MobilS":
-                            client.Package = s;
                             if (client.IsSubscribed == false)
                             {
                                 client.IsSubscribed = true;
-                            }                            
+                                client.Package = s;
+                                client.Package.LoseMoney(client);
+                            }
+                            else
+                            {
+                                if (CheckMoney(s, client))
+                                {
+                                    client.Package.GetMoney(client);
+                                    s.LoseMoney(client);
+                                    client.Package = s;
+                                }
+                                else
+                                {
+                                    throw new NotEnoughMoney();
+                                }
+                            }
                             break;
                         case "MobilM":
-                            client.Package = m;
                             if (client.IsSubscribed == false)
                             {
                                 client.IsSubscribed = true;
+                                client.Package = m;
+                                client.Package.LoseMoney(client);
+                            }
+                            else
+                            {
+                                if (CheckMoney(m, client))
+                                {
+                                    client.Package.GetMoney(client);
+                                    m.LoseMoney(client);
+                                    client.Package = m;
+                                }
+                                else
+                                {
+                                    throw new NotEnoughMoney();
+                                }
                             }
                             break;
                         case "MobilL":
-                            client.Package = l;
                             if (client.IsSubscribed == false)
                             {
                                 client.IsSubscribed = true;
+                                client.Package = l;
+                                client.Package.LoseMoney(client);
+                            }
+                            else
+                            {
+                                if (CheckMoney(l, client))
+                                {
+                                    client.Package.GetMoney(client);
+                                    l.LoseMoney(client);
+                                    client.Package = l;
+                                }
+                                else
+                                {
+                                    throw new NotEnoughMoney();
+                                }
                             }
                             break;
                         case "MobilXL":
-                            client.Package = xl;
                             if (client.IsSubscribed == false)
                             {
                                 client.IsSubscribed = true;
+                                client.Package = xl;
+                                client.Package.LoseMoney(client);
+                            }
+                            else
+                            {
+                                if (CheckMoney(xl, client))
+                                {
+                                    client.Package.GetMoney(client);
+                                    xl.LoseMoney(client);
+                                    client.Package = xl;
+                                }
+                                else
+                                {
+                                    throw new NotEnoughMoney();
+                                }
                             }
                             break;
                         default:
@@ -149,12 +223,18 @@ namespace EpicTariff
                 ClientNotExistAndSubscribed(clients, id);
                 foreach (var client in clients)
                 {
-                    if(client.ID == id)
+                    if(client.ID == id && client.IsSubscribed == true)
                     {
                         client.IsSubscribed = false;
+                        client.Package.GetMoney(client);
                         client.Package = null;
                     }
+                    else
+                    {
+                        throw new Exception();
+                    }
                 }
+                inpuoup.Writer("Tariff successfully removed");
             }
             catch (Exception)
             {
@@ -175,9 +255,13 @@ namespace EpicTariff
                 {
                     if(client.ID == id)
                     {
-                        client.Package.Minutes += plusMinutes;
+                        client.Package.MinuteCharge(client, plusMinutes);
                     }
                 }
+            }
+            catch (NotEnoughMoney)
+            {
+                inpuoup.Writer("This client doesn't have enough money");
             }
             catch (Exception)
             {
@@ -199,9 +283,13 @@ namespace EpicTariff
                 {
                     if (client.ID == id)
                     {
-                        client.Package.Internet += plusInternet;
+                        client.Package.MobileInternetCharge(client, plusInternet);
                     }
                 }
+            }
+            catch (NotEnoughMoney)
+            {
+                inpuoup.Writer("This client doesn't have enough money");
             }
             catch (Exception)
             {
@@ -223,9 +311,13 @@ namespace EpicTariff
                 {
                     if (client.ID == id)
                     {
-                        client.Package.ForeignMinutes += plusForeignMinutes;
+                        client.Package.ForeignMinuteCharge(client, plusForeignMinutes);
                     }
                 }
+            }
+            catch (NotEnoughMoney)
+            {
+                inpuoup.Writer("This client doesn't have enough money");
             }
             catch (Exception)
             {

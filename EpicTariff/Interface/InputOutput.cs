@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using EpicTariff;
+using EpicTariff.Data;
 
-namespace EpicTariff
+namespace EpicTariff.Interface
 {
-    class InputOutput
+    public class InputOutput
     {
         public void Writer(string write)
         {

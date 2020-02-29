@@ -6,7 +6,7 @@ using System.Xml;
 using System.Xml.Serialization;
 using System.Xml.Linq;
 
-namespace EpicTariff
+namespace EpicTariff.Data
 {
     public class XmlHandler
     {
@@ -28,9 +28,9 @@ namespace EpicTariff
                         new XElement("Plan",
                             new XElement("PlanName", client.Package.Name),
                             new XElement("Tariff", client.Package.Tariff),
-                            new XElement("BasicInternet", client.Package.BasicForeignMinutes),
-                            new XElement("BasicMinutes", client.Package.BasicMinutes),
-                            new XElement("ForeignMinutes", client.Package.BasicForeignMinutes)
+                            new XElement("Internet", client.Package.ForeignMinutes),
+                            new XElement("Minutes", client.Package.Minutes),
+                            new XElement("ForeignMinutes", client.Package.ForeignMinutes)
                         )));
                 }
                 else
@@ -72,9 +72,9 @@ namespace EpicTariff
                         {
                             s.Name = mobilnode.Element("PlanName").Value;
                             s.Tariff = Int32.Parse(mobilnode.Element("Tariff").Value);
-                            s.BasicInternet = Int32.Parse(mobilnode.Element("BasicInternet").Value);
-                            s.BasicMinutes = Int32.Parse(mobilnode.Element("BasicMinutes").Value);
-                            s.BasicForeignMinutes = Int32.Parse(mobilnode.Element("ForeignMinutes").Value);
+                            s.Internet = Int32.Parse(mobilnode.Element("Internet").Value);
+                            s.Minutes = Int32.Parse(mobilnode.Element("Minutes").Value);
+                            s.ForeignMinutes = Int32.Parse(mobilnode.Element("ForeignMinutes").Value);
                         }
                         client.Package = s;
                     }
@@ -85,9 +85,9 @@ namespace EpicTariff
                         {
                             m.Name = mobilnode.Element("PlanName").Value;
                             m.Tariff = Int32.Parse(mobilnode.Element("Tariff").Value);
-                            m.BasicInternet = Int32.Parse(mobilnode.Element("BasicInternet").Value);
-                            m.BasicMinutes = Int32.Parse(mobilnode.Element("BasicMinutes").Value);
-                            m.BasicForeignMinutes = Int32.Parse(mobilnode.Element("ForeignMinutes").Value);
+                            m.Internet = Int32.Parse(mobilnode.Element("Internet").Value);
+                            m.Minutes = Int32.Parse(mobilnode.Element("Minutes").Value);
+                            m.ForeignMinutes = Int32.Parse(mobilnode.Element("ForeignMinutes").Value);
                         }
                         client.Package = m;
                     }
@@ -98,9 +98,9 @@ namespace EpicTariff
                         {
                             l.Name = mobilnode.Element("PlanName").Value;
                             l.Tariff = Int32.Parse(mobilnode.Element("Tariff").Value);
-                            l.BasicInternet = Int32.Parse(mobilnode.Element("BasicInternet").Value);
-                            l.BasicMinutes = Int32.Parse(mobilnode.Element("BasicMinutes").Value);
-                            l.BasicForeignMinutes = Int32.Parse(mobilnode.Element("ForeignMinutes").Value);
+                            l.Internet = Int32.Parse(mobilnode.Element("Internet").Value);
+                            l.Minutes = Int32.Parse(mobilnode.Element("Minutes").Value);
+                            l.ForeignMinutes = Int32.Parse(mobilnode.Element("ForeignMinutes").Value);
                         }
                         client.Package = l;
                     }
@@ -111,9 +111,9 @@ namespace EpicTariff
                         {
                             xl.Name = mobilnode.Element("PlanName").Value;
                             xl.Tariff = Int32.Parse(mobilnode.Element("Tariff").Value);
-                            xl.BasicInternet = Int32.Parse(mobilnode.Element("BasicInternet").Value);
-                            xl.BasicMinutes = Int32.Parse(mobilnode.Element("BasicMinutes").Value);
-                            xl.BasicForeignMinutes = Int32.Parse(mobilnode.Element("ForeignMinutes").Value);
+                            xl.Internet = Int32.Parse(mobilnode.Element("Internet").Value);
+                            xl.Minutes = Int32.Parse(mobilnode.Element("Minutes").Value);
+                            xl.ForeignMinutes = Int32.Parse(mobilnode.Element("ForeignMinutes").Value);
                         }
                         client.Package = xl;
                     }

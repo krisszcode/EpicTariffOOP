@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
+using EpicTariff.Interface;
+using EpicTariff.Sexception;
 
-namespace EpicTariff 
+namespace EpicTariff.Data
 {
     public class ClientProvider
     {
@@ -18,9 +20,9 @@ namespace EpicTariff
             {
                 ids.Add(id);
             }
-            while(true)
+            while (true)
             {
-                if(ids.Contains(id))
+                if (ids.Contains(id))
                 {
                     id = rand.Next(1, 10000);
                 }
@@ -50,28 +52,47 @@ namespace EpicTariff
                 case "MobilXL":
                     return xl;
                 default:
-                    break;
+                    throw new BadTariff();
             }
-            return null;
         }
         public List<Client> CreateClient(List<Client> clients)
         {
-            Client cl = new Client();
-            cl.ID = GenerateID(clients);
-            inpuoup.Writer("Give me a name: ");
-            cl.Name = inpuoup.Reader();
-            inpuoup.Writer("Give me an income: ");
-            cl.Income = double.Parse(inpuoup.Reader());
-            inpuoup.Writer("Give me a subscription type(true/false): ");
-            cl.IsSubscribed = bool.Parse(inpuoup.Reader());
-            if (cl.IsSubscribed == true)
+            try
             {
-                inpuoup.Writer("Choose a tariffplan(MobilS, MobilM, MobilL , MobilXL) ");
-                string chos = inpuoup.Reader();
-                TariffPlan tp = ChooseTariff(chos);
-                cl.Package = tp;
+                Client cl = new Client();
+                cl.ID = GenerateID(clients);
+                inpuoup.Writer("Give me a name: ");
+                cl.Name = inpuoup.Reader();
+                inpuoup.Writer("Give me an income: ");
+
+                cl.Income = double.Parse(inpuoup.Reader());
+                if (cl.Income.GetType() != typeof(double))
+                {
+                    throw new Exception();
+                }
+                inpuoup.Writer("Give me a subscription type(true/false): ");
+
+                cl.IsSubscribed = bool.Parse(inpuoup.Reader());
+                if (cl.IsSubscribed.GetType() != typeof(bool))
+                {
+                    throw new Exception();
+                }
+
+                if (cl.IsSubscribed == true)
+                {
+                    inpuoup.Writer("Choose a tariffplan (MobilS, MobilM, MobilL , MobilXL): ");
+                    string chos = inpuoup.Reader();
+                    TariffPlan tp = ChooseTariff(chos);
+                    cl.Package = tp;
+                    cl.Package.LoseMoney(cl);
+                }
+                inpuoup.Writer("Client added successfully!");
+                clients.Add(cl);
             }
-            clients.Add(cl);
+            catch (Exception)
+            {
+                inpuoup.Writer("Invalid income/type of subscription");
+            }
             return clients;
         }
 
@@ -85,34 +106,21 @@ namespace EpicTariff
 
         public List<Client> UpdateClient(List<Client> clients)
         {
-            Error:
-            string attribute = "";
             try
             {
                 Console.WriteLine("Give me what you want to rewrite(Name, Income): ");
-                attribute = inpuoup.Reader().ToUpper();
-                if(attribute != "NAME" && attribute != "INCOME")
+                string attribute = inpuoup.Reader().ToUpper();
+                if (attribute != "NAME" && attribute != "INCOME")
                 {
                     throw new Exception();
                 }
-            }
-            catch (Exception)
-            {
-                inpuoup.Writer("You must write a Name or an Income");
-                goto Error;
-            }
-                      
-            int ID = 0;
-            ListClients(clients);
-            List<int> ids = new List<int>();
-            foreach (var client in clients)
-            {
-                ids.Add(client.ID);
-            }
-            try
-            {
+                List<int> ids = new List<int>();
+                foreach (var client in clients)
+                {
+                    ids.Add(client.ID);
+                }
                 inpuoup.Writer("Which ID of a client you want to rewrite?");
-                ID = int.Parse(inpuoup.Reader());
+                int ID = int.Parse(inpuoup.Reader());
                 foreach (var client in clients)
                 {
                     if (!ids.Contains(ID))
@@ -120,14 +128,7 @@ namespace EpicTariff
                         throw new Exception();
                     }
                 }
-            }
-            catch (Exception)
-            {
-                inpuoup.Writer("Not valid input");
-                goto Error;
-            }
-            try
-            {
+            
                 switch (attribute)
                 {
                     case "NAME":
@@ -153,30 +154,48 @@ namespace EpicTariff
                         }
                         break;
                     default:
-                        Console.WriteLine("Wrong option...");
-                        Thread.Sleep(500);
-                        Console.Clear();
-                        break;
+                        throw new Exception();
                 }
+                inpuoup.Writer("Updated successfully!");
             }
             catch (Exception)
             {
                 inpuoup.Writer("Not valid input");
+                Thread.Sleep(2020);
             }
-
+            
             return clients;
         }
+    
         public List<Client> RemoveAClient(List<Client> clients)
         {
-            inpuoup.Writer("Give me an id to remove:");
-            int id = int.Parse(inpuoup.Reader());
-            for (int i = 0; i < clients.Count; i++)
+            try
             {
-                if(clients[i].ID  == id)
+                List<int> ids = new List<int>();
+                foreach (var client in clients)
                 {
-                    clients.RemoveAt(i);
+                    ids.Add(client.ID);
+                }
+                inpuoup.Writer("Give me an id to remove:");
+                int id = int.Parse(inpuoup.Reader());
+                if(!ids.Contains(id))
+                {
+                    throw new Exception();
+                }
+                for (int i = 0; i < clients.Count; i++)
+                {
+                    if (clients[i].ID == id)
+                    {
+                        clients.RemoveAt(i);
+                    }
                 }
             }
+            catch (Exception)
+            {
+
+                inpuoup.Writer("Not valid input");
+            }
+           
             return clients;
         }
     }

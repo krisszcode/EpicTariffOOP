@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace EpicTariff
+namespace EpicTariff.Sexception
 {
     [Serializable]
-    class NotEnoughMoney : Exception
+    class BadTariff : Exception
     {
-        public NotEnoughMoney()
+        public BadTariff()
         { }
     }
 }

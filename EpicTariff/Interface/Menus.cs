@@ -1,26 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Threading;
+using EpicTariff.Data;
 
-namespace EpicTariff
+namespace EpicTariff.Interface
 {
-    public class Program
+    public class Menus
     {
-        public static List<Client> clients = new List<Client>();
-        static void Main(string[] args)
+        public List<Client> clients = new List<Client>();
+        public bool ClientSubMenu(List<Client> clients)
         {
-            Program program = new Program();
-            XmlHandler xml = new XmlHandler();
-            xml.LoadfromXML(clients);
-            bool loop = true;
-            while (loop)
-            {
-                Menu();
-            }
-        }
-        static bool ClientSubMenu()
-        {
-            Here:
+        Here:
             InputOutput inpuoup = new InputOutput();
             ClientProvider clientprov = new ClientProvider();
             inpuoup.Writer("1. Kliens létrehozása");
@@ -33,22 +24,30 @@ namespace EpicTariff
                 switch (chos)
                 {
                     case "1":
+                        Console.Clear();
                         clientprov.CreateClient(clients);
+                        Thread.Sleep(2020);
                         Console.Clear();
                         goto Here;
                     case "2":
+                        Console.Clear();
                         clientprov.ListClients(clients);
+                        inpuoup.Writer("Press any key to continue...");
                         Console.ReadKey();
                         Console.Clear();
                         goto Here;
                     case "3":
+                        Console.Clear();
+                        clientprov.ListClients(clients);
                         clientprov.UpdateClient(clients);
-                        Console.ReadKey();
+                        Thread.Sleep(2020);
                         Console.Clear();
                         goto Here;
                     case "4":
+                        Console.Clear();
+                        clientprov.ListClients(clients);
                         clientprov.RemoveAClient(clients);
-                        Console.ReadKey();
+                        Thread.Sleep(2020);
                         Console.Clear();
                         goto Here;
                     case "0":
@@ -56,14 +55,14 @@ namespace EpicTariff
                         return false;
                     default:
                         Console.WriteLine("Wrong option...");
-                        Thread.Sleep(500);
+                        Thread.Sleep(2020);
                         Console.Clear();
                         goto Here;
                 }
-               
+
             }
         }
-        static bool TariffSubMenu()
+        public bool TariffSubMenu(List<Client> clients)
         {
         Here:
             InputOutput inpuoup = new InputOutput();
@@ -82,26 +81,52 @@ namespace EpicTariff
                 switch (chos)
                 {
                     case "1":
+                        Console.Clear();
                         tarprov.ListTariff();
+                        inpuoup.Writer("Press any key to continue!");
                         Console.ReadKey();
                         Console.Clear();
                         goto Here;
                     case "2":
+                        Console.Clear();
                         clientprov.ListClients(clients);
                         tarprov.TariffToClient(clients);
-                        Console.ReadKey();
+                        Thread.Sleep(2020);
                         Console.Clear();
                         goto Here;
                     case "3":
+                        Console.Clear();
                         clientprov.ListClients(clients);
                         tarprov.ModifyTariff(clients);
-                        Console.ReadKey();
+                        Thread.Sleep(2020);
                         Console.Clear();
                         goto Here;
                     case "4":
+                        Console.Clear();
                         clientprov.ListClients(clients);
                         tarprov.RemoveTariff(clients);
-                        Console.ReadKey();
+                        Thread.Sleep(2020);
+                        Console.Clear();
+                        goto Here;
+                    case "5":
+                        Console.Clear();
+                        clientprov.ListClients(clients);
+                        tarprov.RequestInternet(clients);
+                        Thread.Sleep(2020);
+                        Console.Clear();
+                        goto Here;
+                    case "6":
+                        Console.Clear();
+                        clientprov.ListClients(clients);
+                        tarprov.RequestMinutes(clients);
+                        Thread.Sleep(2020);
+                        Console.Clear();
+                        goto Here;
+                    case "7":
+                        Console.Clear();
+                        clientprov.ListClients(clients);
+                        tarprov.RequestForeignMinutes(clients);
+                        Thread.Sleep(2020);
                         Console.Clear();
                         goto Here;
                     case "0":
@@ -109,31 +134,33 @@ namespace EpicTariff
                         return false;
                     default:
                         Console.WriteLine("Wrong option...");
-                        Thread.Sleep(500);
+                        Thread.Sleep(2020);
                         Console.Clear();
                         goto Here;
                 }
 
             }
         }
-        static bool Menu()
+        public bool Menu(List<Client> clients)
         {
             XmlHandler xml = new XmlHandler();
             InputOutput inpuoup = new InputOutput();
             inpuoup.Writer("1. Kliensek kezelése");
             inpuoup.Writer("2. Díjcsomagok kezelése");
-            
-            
+
+
             string chos = inpuoup.Reader();
             while (true)
             {
                 switch (chos)
                 {
                     case "1":
-                        ClientSubMenu();
+                        Console.Clear();
+                        ClientSubMenu(clients);
                         return true;
                     case "2":
-                        TariffSubMenu();
+                        Console.Clear();
+                        TariffSubMenu(clients);
                         return true;
                     case "0":
                         xml.SaveToXml(clients);
@@ -141,7 +168,8 @@ namespace EpicTariff
                         break;
                     default:
                         Console.WriteLine("Wrong option...");
-                        Thread.Sleep(500);
+                        Thread.Sleep(2020);
+                        Console.Clear();
                         return true;
                 }
             }

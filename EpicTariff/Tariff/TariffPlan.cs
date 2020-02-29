@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace EpicTariff
+namespace EpicTariff.Data
 {
     public abstract class TariffPlan
     {
@@ -27,13 +27,14 @@ namespace EpicTariff
 
        
         public abstract int MinuteCharge(Client client, int requestedMinutes);
-
         public abstract int ForeignMinuteCharge(Client client, int requestedForeignMinutes);
         public abstract int MobileInternetCharge(Client client, int requestedInternet);
+        public abstract Client LoseMoney(Client client);
+        public abstract void GetMoney(Client client);
 
         public override string ToString()
         {
-            return $"{Name}\nTariff: {Tariff}\nBasicInternet: {Internet}\nBasicMinutes: {Minutes}\nBasicForeignMinutes: {ForeignMinutes}\n";
+            return $"{Name}\nTariff: {Tariff}\nInternet: {Internet}\nMinutes: {Minutes}\nForeignMinutes: {ForeignMinutes}\n";
         }
     }
 }
