@@ -19,11 +19,5 @@ namespace EpicTariff.Interface
             read = Console.ReadLine();
             return read;
         }
-
-        public int IdGenerator(List<int> ids)
-        {
-            int id = ids.Count + 1;
-            return id;
-        }
     }
 }

@@ -19,13 +19,13 @@ namespace EpicTariff.Data
             Minutes = minutes;
             ForeignMinutes = foreignMinutes;
         }
+
         public string Name { get; set; }
         public int Tariff { get; set; }
         public int Internet { get; set; }
         public int Minutes { get; set; }
         public int ForeignMinutes { get; set; }
 
-       
         public abstract int MinuteCharge(Client client, int requestedMinutes);
         public abstract int ForeignMinuteCharge(Client client, int requestedForeignMinutes);
         public abstract int MobileInternetCharge(Client client, int requestedInternet);

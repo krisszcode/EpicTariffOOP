@@ -13,7 +13,6 @@ namespace EpicTariff.Data
 
         }
        
-
         public override int ForeignMinuteCharge(Client client, int requestedForeignMinutes)
         {
 
@@ -59,6 +58,7 @@ namespace EpicTariff.Data
             client.Income -= requestedInternet * 0.24;
             return client.Package.Internet += requestedInternet;
         }
+
         public override string ToString()
         {
             return base.ToString();

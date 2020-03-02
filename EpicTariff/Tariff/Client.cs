@@ -26,7 +26,4 @@ namespace EpicTariff.Data
             }
         }
     }
-
-    
-    
 }

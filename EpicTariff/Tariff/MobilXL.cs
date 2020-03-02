@@ -12,6 +12,7 @@ namespace EpicTariff.Data
         {
 
         }
+
         public override int ForeignMinuteCharge(Client client, int requestedForeignMinutes)
         {
             if (client.Income < requestedForeignMinutes * 0.15)

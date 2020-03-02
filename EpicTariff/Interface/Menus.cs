@@ -62,6 +62,7 @@ namespace EpicTariff.Interface
 
             }
         }
+
         public bool TariffSubMenu(List<Client> clients)
         {
         Here:
@@ -138,16 +139,15 @@ namespace EpicTariff.Interface
                         Console.Clear();
                         goto Here;
                 }
-
             }
         }
+
         public bool Menu(List<Client> clients)
         {
             XmlHandler xml = new XmlHandler();
             InputOutput inpuoup = new InputOutput();
             inpuoup.Writer("1. Kliensek kezelése");
             inpuoup.Writer("2. Díjcsomagok kezelése");
-
 
             string chos = inpuoup.Reader();
             while (true)

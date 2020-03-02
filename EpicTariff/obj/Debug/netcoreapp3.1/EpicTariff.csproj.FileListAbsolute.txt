@@ -20,3 +20,5 @@ D:\programozás\programozás\c#\EpicTariffOOP\EpicTariff\obj\Debug\netcoreapp3.1
 D:\programozás\programozás\c#\EpicTariffOOP\EpicTariff\obj\Debug\netcoreapp3.1\EpicTariff.AssemblyInfo.cs
 D:\programozás\programozás\c#\EpicTariffOOP\EpicTariff\obj\Debug\netcoreapp3.1\EpicTariff.dll
 D:\programozás\programozás\c#\EpicTariffOOP\EpicTariff\obj\Debug\netcoreapp3.1\EpicTariff.pdb
+D:\programozás\programozás\c#\EpicTariffOOP\EpicTariff\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+D:\programozás\programozás\c#\EpicTariffOOP\EpicTariff\obj\Debug\netcoreapp3.1\EpicTariff.csproj.CopyComplete

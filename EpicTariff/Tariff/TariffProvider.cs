@@ -76,7 +76,6 @@ namespace EpicTariff.Data
             return clients;
         }
 
-        //Módosítás csak akkor lehet, ha már létezik díjcsomagja az ügyfélnek, akinek van ID-ja
         public List<Client> ModifyTariff(List<Client> clients)
         {
             try
@@ -84,7 +83,7 @@ namespace EpicTariff.Data
                 inpuoup.Writer("Give me a client's ID: ");
                 int id = int.Parse(inpuoup.Reader());
                 ClientNotExistAndSubscribed(clients, id);
-                AddTariff(clients, id, "What is the new Tariff? (MobilM/MobilS/MobilL/MobilXL) ");
+                AddTariff(clients, id, "What is the new Tariff? (MobilS/MobilM/MobilL/MobilXL) ");
             }
             catch(NotEnoughMoney)
             {
@@ -100,7 +99,6 @@ namespace EpicTariff.Data
 
         public bool CheckMoney(TariffPlan tariff, Client client)
         {
-            //client.Income + client.Package.GetMoney(client).Income >= m.LoseMoney(client).Income
             if (client.Income + client.Package.Tariff >= tariff.Tariff)
             {
                 return true;
@@ -214,6 +212,7 @@ namespace EpicTariff.Data
             }
             return clients;
         }
+
         public List<Client> RemoveTariff(List<Client> clients)
         {
             try
@@ -242,6 +241,7 @@ namespace EpicTariff.Data
             }
             return clients;
         }
+
         public List<Client> RequestMinutes(List<Client> clients)
         {
             try
@@ -325,6 +325,5 @@ namespace EpicTariff.Data
             }
             return clients;
         }
-
     }
 }
