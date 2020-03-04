@@ -18,6 +18,7 @@ namespace EpicTariff.Interface
             inpuoup.Writer("2. Kliensek listázása");
             inpuoup.Writer("3. Kliensek módosítása");
             inpuoup.Writer("4. Kliensek törlése");
+            inpuoup.Writer("0. Vissza a menűbe");
             string chos = inpuoup.Reader();
             while (true)
             {
@@ -76,6 +77,7 @@ namespace EpicTariff.Interface
             inpuoup.Writer("5. Mobilinternet kérés");
             inpuoup.Writer("6. Perc kérés");
             inpuoup.Writer("7. Külföldi perc kérés");
+            inpuoup.Writer("0. Vissza a menűbe");
             string chos = inpuoup.Reader();
             while (true)
             {
@@ -148,6 +150,7 @@ namespace EpicTariff.Interface
             InputOutput inpuoup = new InputOutput();
             inpuoup.Writer("1. Kliensek kezelése");
             inpuoup.Writer("2. Díjcsomagok kezelése");
+            inpuoup.Writer("0. Kilépés a programból");
 
             string chos = inpuoup.Reader();
             while (true)
